@@ -33,3 +33,9 @@ E:\Repository\webapi-authentication-jwt\Jwt_Auth\Jwt_Auth\obj\Debug\net10.0\refi
 E:\Repository\webapi-authentication-jwt\Jwt_Auth\Jwt_Auth\obj\Debug\net10.0\Jwt_Auth.pdb
 E:\Repository\webapi-authentication-jwt\Jwt_Auth\Jwt_Auth\obj\Debug\net10.0\Jwt_Auth.genruntimeconfig.cache
 E:\Repository\webapi-authentication-jwt\Jwt_Auth\Jwt_Auth\obj\Debug\net10.0\ref\Jwt_Auth.dll
+E:\Repository\webapi-authentication-jwt\Jwt_Auth\Jwt_Auth\bin\Debug\net10.0\Scalar.AspNetCore.dll
+E:\Repository\webapi-authentication-jwt\Jwt_Auth\Jwt_Auth\bin\Debug\net10.0\Microsoft.IdentityModel.Abstractions.dll
+E:\Repository\webapi-authentication-jwt\Jwt_Auth\Jwt_Auth\bin\Debug\net10.0\Microsoft.IdentityModel.JsonWebTokens.dll
+E:\Repository\webapi-authentication-jwt\Jwt_Auth\Jwt_Auth\bin\Debug\net10.0\Microsoft.IdentityModel.Logging.dll
+E:\Repository\webapi-authentication-jwt\Jwt_Auth\Jwt_Auth\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll
+E:\Repository\webapi-authentication-jwt\Jwt_Auth\Jwt_Auth\bin\Debug\net10.0\System.IdentityModel.Tokens.Jwt.dll
