@@ -1,7 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\Repository\\webapi-authentication-jwt\\Jwt_Auth\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C904E99D-8448-CB16-EEE3-15C2B81CE8D3}|Jwt_Auth\\Jwt_Auth.csproj|e:\\repository\\webapi-authentication-jwt\\jwt_auth\\jwt_auth\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C904E99D-8448-CB16-EEE3-15C2B81CE8D3}|Jwt_Auth\\Jwt_Auth.csproj|solutionrelative:jwt_auth\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,8 +14,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "User.cs",
+              "DocumentMoniker": "E:\\Repository\\webapi-authentication-jwt\\Jwt_Auth\\Jwt_Auth\\Entities\\User.cs",
+              "RelativeDocumentMoniker": "Jwt_Auth\\Entities\\User.cs",
+              "ToolTip": "E:\\Repository\\webapi-authentication-jwt\\Jwt_Auth\\Jwt_Auth\\Entities\\User.cs",
+              "RelativeToolTip": "Jwt_Auth\\Entities\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-23T08:34:10.589Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
