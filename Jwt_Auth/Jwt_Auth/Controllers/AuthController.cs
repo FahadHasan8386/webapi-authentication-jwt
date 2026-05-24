@@ -43,20 +43,13 @@ namespace Jwt_Auth.Controllers
 
         private string CreateToken(User user)
         {
-            var tokenKey = configuration.GetValue<string>("AppSettings:Token");
-
-            if (string.IsNullOrEmpty(tokenKey))
-            {
-                throw new Exception("JWT Token key is missing in configuration!");
-            }
-
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Username)
             };
 
             var key = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(tokenKey)
+                Encoding.UTF8.GetBytes(configuration.GetValue<string>("AppSettings:Token")!));
             );
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
