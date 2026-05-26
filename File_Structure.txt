@@ -1,0 +1,21 @@
+Jwt_Auth
+│
+├── Controllers
+│   └── AuthController.cs
+│
+├── Services
+│   ├── IAuthService.cs
+│   └── AuthService.cs
+│
+├── Models
+│   └── UserDto.cs
+│
+├── Entities
+│   └── User.cs
+│
+├── Data
+│   └── UserDbContext.cs
+│
+├── Program.cs
+│
+└── appsettings.json
