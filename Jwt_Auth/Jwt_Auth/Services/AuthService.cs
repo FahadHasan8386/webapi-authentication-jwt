@@ -10,34 +10,46 @@ using System.Text;
 
 namespace Jwt_Auth.Services
 {
-    public class AuthService(UserDbContext context, IConfiguration configuration) : IAuthService
+    public class AuthService(UserDbContext context, IConfiguration configuration): IAuthService
     {
+
         public async Task<string?> LoginAsync(UserDto request)
         {
-            var user = await context.Users.FirstOrDefaultAsync(u => u.Username == request.UserName);
-            if (user.Username != request.UserName)
+            var user = await context.Users
+                .FirstOrDefaultAsync(u => u.Username == request.UserName);
+
+            // user null check
+            if (user == null)
             {
                 return null;
             }
-            if (new PasswordHasher<User>().VerifyHashedPassword(user, user.PasswordHash, request.Password) == PasswordVerificationResult.Failed)
+
+            // password verify
+            if (new PasswordHasher<User>()
+                .VerifyHashedPassword(user, user.PasswordHash, request.Password)
+                == PasswordVerificationResult.Failed)
             {
                 return null;
             }
+
             return CreateToken(user);
         }
 
         public async Task<User?> RegisterAsync(UserDto request)
         {
-            if (await context.Users.AnyAsync(u => u.Username == request.UserName)) 
+            // username exists check
+            if (await context.Users.AnyAsync(u => u.Username == request.UserName))
             {
                 return null;
             }
 
             var user = new User();
-            var hasedPassword = new PasswordHasher<User>().HashPassword(user, request.Password);
+
+            var hashedPassword = new PasswordHasher<User>()
+                .HashPassword(user, request.Password);
 
             user.Username = request.UserName;
-            user.PasswordHash = hasedPassword;
+            user.PasswordHash = hashedPassword;
 
             context.Users.Add(user);
             await context.SaveChangesAsync();
@@ -49,25 +61,30 @@ namespace Jwt_Auth.Services
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Username),
-                new Claim()
+                new Claim(ClaimTypes.Name, user.Username)
             };
 
             var key = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(configuration.GetValue<string>("AppSettings:Token")!));
+                Encoding.UTF8.GetBytes(
+                    configuration["AppSettings:Token"]!
+                )
             );
 
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
+            var creds = new SigningCredentials(
+                key,
+                SecurityAlgorithms.HmacSha512
+            );
 
-            var tokenDescription = new JwtSecurityToken(
-                issuer: configuration.GetValue<string>("AppSettings:Issuer"),
-                audience: configuration.GetValue<string>("AppSettings:Audience"),
+            var tokenDescriptor = new JwtSecurityToken(
+                issuer: configuration["AppSettings:Issuer"],
+                audience: configuration["AppSettings:Audience"],
                 claims: claims,
                 expires: DateTime.UtcNow.AddDays(1),
                 signingCredentials: creds
             );
 
-            return new JwtSecurityTokenHandler().WriteToken(tokenDescription);
+            return new JwtSecurityTokenHandler()
+                .WriteToken(tokenDescriptor);
         }
     }
 }
