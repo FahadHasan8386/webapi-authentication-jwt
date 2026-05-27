@@ -30,20 +30,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Jwt_Auth",
+              "Title": "Jwt_Auth.csproj",
               "DocumentMoniker": "E:\\Repository\\webapi-authentication-jwt\\Jwt_Auth\\Jwt_Auth\\Jwt_Auth.csproj",
               "RelativeDocumentMoniker": "Jwt_Auth\\Jwt_Auth.csproj",
               "ToolTip": "E:\\Repository\\webapi-authentication-jwt\\Jwt_Auth\\Jwt_Auth\\Jwt_Auth.csproj",
               "RelativeToolTip": "Jwt_Auth\\Jwt_Auth.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-05-26T15:56:43.51Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-26T15:56:43.51Z"
             },
             {
               "$type": "Document",
@@ -59,10 +62,6 @@
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "AuthController.cs",
@@ -72,8 +71,7 @@
               "RelativeToolTip": "Jwt_Auth\\Controllers\\AuthController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-23T08:56:16.493Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-23T08:56:16.493Z"
             },
             {
               "$type": "Document",
@@ -85,8 +83,7 @@
               "RelativeToolTip": "Jwt_Auth\\Services\\AuthService.cs",
               "ViewState": "AgIAAFkAAAAAAAAAAAAAAAwAAABRAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-23T08:50:19.821Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-23T08:50:19.821Z"
             },
             {
               "$type": "Document",
@@ -98,8 +95,7 @@
               "RelativeToolTip": "Jwt_Auth\\Services\\IAuthService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-23T08:49:53.646Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-23T08:49:53.646Z"
             }
           ]
         }
