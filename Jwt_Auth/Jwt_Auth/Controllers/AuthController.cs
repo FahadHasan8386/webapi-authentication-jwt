@@ -1,6 +1,7 @@
 ﻿using Jwt_Auth.Entities;
 using Jwt_Auth.Models;
 using Jwt_Auth.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Jwt_Auth.Controllers
@@ -34,6 +35,12 @@ namespace Jwt_Auth.Controllers
             }
 
             return Ok(token);
+        }
+        [Authorize]
+        [HttpGet]
+        public IActionResult AuthenticatedOnlyEndpoint()
+        {
+            return Ok("Yor are authenticated .");
         }
     }
 }
