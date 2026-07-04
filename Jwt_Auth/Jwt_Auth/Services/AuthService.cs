@@ -26,8 +26,7 @@ namespace Jwt_Auth.Services
 
             // password verify
             if (new PasswordHasher<User>()
-                .VerifyHashedPassword(user, user.PasswordHash, request.Password)
-                == PasswordVerificationResult.Failed)
+                .VerifyHashedPassword(user, user.PasswordHash, request.Password) == PasswordVerificationResult.Failed)
             {
                 return null;
             }
@@ -65,9 +64,7 @@ namespace Jwt_Auth.Services
             };
 
             var key = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(
-                    configuration["AppSettings:Token"]!
-                )
+                Encoding.UTF8.GetBytes( configuration["AppSettings:Token"]!)
             );
 
             var creds = new SigningCredentials(
