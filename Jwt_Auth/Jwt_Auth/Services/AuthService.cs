@@ -1,4 +1,5 @@
-﻿using Jwt_Auth.Data;
+﻿using Azure.Core;
+using Jwt_Auth.Data;
 using Jwt_Auth.Entities;
 using Jwt_Auth.Models;
 using Microsoft.AspNetCore.Identity;
@@ -13,7 +14,7 @@ namespace Jwt_Auth.Services
     public class AuthService(UserDbContext context, IConfiguration configuration): IAuthService
     {
 
-        public async Task<string?> LoginAsync(UserDto request)
+        public async Task<TokenResponseDto?> LoginAsync(UserDto request)
         {
             var user = await context.Users
                 .FirstOrDefaultAsync(u => u.Username == request.UserName);
@@ -25,13 +26,21 @@ namespace Jwt_Auth.Services
             }
 
             // password verify
-            if (new PasswordHasher<User>()
-                .VerifyHashedPassword(user, user.PasswordHash, request.Password) == PasswordVerificationResult.Failed)
+            if (new PasswordHasher<User>().VerifyHashedPassword(user, user.PasswordHash, request.Password) 
+                == PasswordVerificationResult.Failed)
             {
                 return null;
             }
 
-            return CreateToken(user);
+            return await CreateTokenResponse(user);
+        }
+        private async Task<TokenResponseDto> CreateTokenResponse(User? user)
+        {
+            return new TokenResponseDto
+            {
+                AccessToken = CreateToken(user),
+                RefreshToken
+            };
         }
 
         public async Task<User?> RegisterAsync(UserDto request)
