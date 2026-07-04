@@ -39,7 +39,7 @@ namespace Jwt_Auth.Services
             return new TokenResponseDto
             {
                 AccessToken = CreateToken(user),
-                RefreshToken
+                RefreshToken = GenerateAndSaveRefreshTokenAsync(user)
             };
         }
 
@@ -65,32 +65,47 @@ namespace Jwt_Auth.Services
             return user;
         }
 
+        public async Task<TokenResponseDto?> RefreshTokenAsync(RefreshTokenRequestDto request)
+        {
+            var result = await ValidateRefreshTokenAsync(request.UserId, request.RefreshToken);
+
+            if(result is null)
+            {
+                return null;
+            }
+            return await CreateTokenResponse(result);
+        }
+
+
+
+        private async Task<string> GenerateAndSaveRefreshTokenAsync(User user)
+        {
+            var refreshToken = GenerateRefreshToken();
+        }
+
         private string CreateToken(User user)
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Username)
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Role, user.Role)
             };
 
             var key = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes( configuration["AppSettings:Token"]!)
-            );
+                Encoding.UTF8.GetBytes(configuration.GetValue<string>("AppSettings:Token")!));
 
-            var creds = new SigningCredentials(
-                key,
-                SecurityAlgorithms.HmacSha512
-            );
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
 
             var tokenDescriptor = new JwtSecurityToken(
-                issuer: configuration["AppSettings:Issuer"],
-                audience: configuration["AppSettings:Audience"],
+                issuer: configuration.GetValue<string>("AppSettings:Issuer"),
+                audience: configuration.GetValue<string>("AppSettings:Audience"),
                 claims: claims,
                 expires: DateTime.UtcNow.AddDays(1),
                 signingCredentials: creds
             );
 
-            return new JwtSecurityTokenHandler()
-                .WriteToken(tokenDescriptor);
+            return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
         }
     }
 }
