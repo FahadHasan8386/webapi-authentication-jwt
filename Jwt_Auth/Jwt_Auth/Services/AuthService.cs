@@ -35,7 +35,7 @@ namespace Jwt_Auth.Services
 
             return await CreateTokenResponse(user);
         }
-        private async Task<TokenResponseDto> CreateTokenResponse(User? user)
+        private async Task<TokenResponseDto> CreateTokenResponse(User user)
         {
             return new TokenResponseDto
             {
