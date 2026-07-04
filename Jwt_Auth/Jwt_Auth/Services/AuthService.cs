@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Jwt_Auth.Services
@@ -39,7 +40,7 @@ namespace Jwt_Auth.Services
             return new TokenResponseDto
             {
                 AccessToken = CreateToken(user),
-                RefreshToken = GenerateAndSaveRefreshTokenAsync(user)
+                RefreshToken = await GenerateAndSaveRefreshTokenAsync(user)
             };
         }
 
@@ -76,11 +77,31 @@ namespace Jwt_Auth.Services
             return await CreateTokenResponse(result);
         }
 
+        public async Task<User?> ValidateRefreshTokenAsync(Guid userId , string refreshToken)
+        {
+            var result = await context.Users.FindAsync(userId);
+            if(result is null || result.RefreshToken != refreshToken || result.RefreshTokenExpiryTime <= DateTime.UtcNow)
+            {
+                return null;
+            }
+            return result;
+        }
 
+        public string GenerateRefreshToken()
+        {
+            var randomNumber = new byte[32];
+            using var rng = RandomNumberGenerator.Create();
+            rng.GetBytes(randomNumber);
+            return Convert.ToBase64String(randomNumber);
+        }
 
         private async Task<string> GenerateAndSaveRefreshTokenAsync(User user)
         {
             var refreshToken = GenerateRefreshToken();
+            user.RefreshToken = refreshToken;
+            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
+            await context.SaveChangesAsync();
+            return refreshToken;
         }
 
         private string CreateToken(User user)
