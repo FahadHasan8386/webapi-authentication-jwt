@@ -3,6 +3,7 @@ using Jwt_Auth.Models;
 using Jwt_Auth.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Jwt_Auth.Controllers
 {
@@ -35,6 +36,23 @@ namespace Jwt_Auth.Controllers
             }
 
             return Ok(result);
+        }
+
+        [Authorize]
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            if(userIdClaim == null)
+            {
+                return Unauthorized();
+            }
+            var success = await authService.LogoutAsync(Guid.Parse(userIdClaim.Value));
+            if (!success)
+                return NotFound();
+
+            return Ok("Logged out successfully.");
         }
 
         [HttpPost("refresh-token")]
