@@ -54,6 +54,7 @@ namespace Jwt_Auth.Controllers
             return Ok("Yor are authenticated .");
         }
 
+
         [Authorize(Roles = "Admin")]
         [HttpGet("admin-only")]
         public IActionResult AdminOnlyEndpoint()

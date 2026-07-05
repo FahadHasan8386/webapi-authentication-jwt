@@ -128,5 +128,21 @@ namespace Jwt_Auth.Services
 
             return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
         }
+
+        public async Task<bool> LogoutAsync(Guid userId)
+        {
+            var result = await context.Users.FindAsync(userId);
+
+            if(result == null)
+            {
+                return false;
+            }
+            result.RefreshToken = null;
+            result.RefreshTokenExpiryTime = null;
+
+            await context.SaveChangesAsync();
+
+            return true;
+        }
     }
 }
